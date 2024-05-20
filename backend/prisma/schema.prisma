@@ -7,6 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int    @id @default(autoincrement())
+model Todo {
+  id        String   @id @default(uuid())
+  title     String
+  task      String?
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
