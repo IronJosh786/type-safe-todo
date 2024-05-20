@@ -13,7 +13,6 @@ const SingleTodo = ({ todo }: { todo: TodoInterface }) => {
 
   const [title, setTitle] = useState(todo.title);
   const [task, setTask] = useState(todo.task);
-  const [completed, setCompleted] = useState(todo.completed);
 
   const { mutate: updateTodo, isPending } = useUpdateTodo();
   const { mutate: deleteTodo } = useDeleteTodo();
@@ -32,7 +31,7 @@ const SingleTodo = ({ todo }: { todo: TodoInterface }) => {
     updateTodo({
       id: todo.id,
       data: {
-        completed: !completed,
+        completed: !todo.completed,
       },
     });
   };
@@ -94,14 +93,14 @@ const SingleTodo = ({ todo }: { todo: TodoInterface }) => {
           <input
             type="checkbox"
             className="checkbox"
-            defaultChecked={completed}
+            defaultChecked={todo.completed}
             onChange={handleCompletionToggle}
             disabled={isPending}
           />
         </label>
       </th>
-      <td className="w-96 text-center">{title}</td>
-      <td className="w-96 text-center">{task}</td>
+      <td className="w-96 text-center">{todo.title}</td>
+      <td className="w-96 text-center">{todo.task}</td>
       <td className="flex justify-center items-center">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-sm">
