@@ -25,7 +25,16 @@ const addTodo = async (req: Request, res: Response) => {
 
 const getTodos = async (req: Request, res: Response) => {
   try {
-    const todos = await prisma.todo.findMany();
+    const todos = await prisma.todo.findMany({
+      orderBy: [
+        {
+          completed: "asc",
+        },
+        {
+          createdAt: "asc",
+        },
+      ],
+    });
     return res.status(200).json({ message: "Fetched todos", todos: todos });
   } catch (error) {
     return res
